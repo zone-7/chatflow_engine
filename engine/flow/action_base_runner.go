@@ -9,7 +9,7 @@ import (
 type BaseRunner struct {
 }
 
-func (r *BaseRunner) getChatSession(s *andflow.Session) *ChatSession {
+func (r *BaseRunner) GetChatSession(s *andflow.Session) *ChatSession {
 	runtimeId := s.GetRuntime().Id
 
 	session := GetChatSession(runtimeId)
@@ -17,7 +17,7 @@ func (r *BaseRunner) getChatSession(s *andflow.Session) *ChatSession {
 	return session
 }
 
-func (r *BaseRunner) getActionParam(action *andflow.ActionModel, key string, ps map[string]interface{}) string {
+func (r *BaseRunner) GetActionParam(action *andflow.ActionModel, key string, ps map[string]interface{}) string {
 	value := action.Params[key]
 	if len(value) > 0 && ps != nil && len(ps) > 0 {
 
@@ -31,7 +31,7 @@ func (r *BaseRunner) getActionParam(action *andflow.ActionModel, key string, ps 
 	return value
 }
 
-func (r *BaseRunner) getActionParams(action *andflow.ActionModel, ps map[string]interface{}) (map[string]string, error) {
+func (r *BaseRunner) GetActionParams(action *andflow.ActionModel, ps map[string]interface{}) (map[string]string, error) {
 
 	params := make(map[string]string)
 
@@ -53,7 +53,7 @@ func (r *BaseRunner) getActionParams(action *andflow.ActionModel, ps map[string]
 	return params, nil
 }
 
-func (r *BaseRunner) getNextActionsByName(s *andflow.Session, action *andflow.ActionModel, name string) []*andflow.ActionModel {
+func (r *BaseRunner) GetNextActionsByName(s *andflow.Session, action *andflow.ActionModel, name string) []*andflow.ActionModel {
 	//获取后续节点
 	var nas []*andflow.ActionModel
 	if strings.Trim(name, " ") == "" {
@@ -75,7 +75,7 @@ func (r *BaseRunner) getNextActionsByName(s *andflow.Session, action *andflow.Ac
 }
 
 // 执行下一步的判断
-func (r *BaseRunner) getNextActionsByKeyword(s *andflow.Session, action *andflow.ActionModel, messageContent string) []*andflow.ActionModel {
+func (r *BaseRunner) GetNextActionsByKeyword(s *andflow.Session, action *andflow.ActionModel, messageContent string) []*andflow.ActionModel {
 	//获取后续节点
 	var nas []*andflow.ActionModel
 
@@ -110,7 +110,7 @@ func (r *BaseRunner) getNextActionsByKeyword(s *andflow.Session, action *andflow
 }
 
 // 执行下一步keyword空的路径
-func (r *BaseRunner) getNextActionsByEmptyKeyword(s *andflow.Session, action *andflow.ActionModel) []*andflow.ActionModel {
+func (r *BaseRunner) GetNextActionsByEmptyKeyword(s *andflow.Session, action *andflow.ActionModel) []*andflow.ActionModel {
 	//获取后续节点
 	var nas []*andflow.ActionModel
 

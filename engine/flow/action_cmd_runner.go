@@ -32,7 +32,7 @@ func (r *CmdRunner) Execute(s *andflow.Session, param *andflow.ActionParam, stat
 
 	actionId := param.ActionId
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 
 	if err != nil {
 		return andflow.RESULT_FAILURE, err

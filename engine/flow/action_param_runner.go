@@ -45,9 +45,9 @@ func (r *ParamRunner) Properties() []andflow.Prop {
 func (r *ParamRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 	action := s.GetFlow().GetAction(param.ActionId)
-	chatSession := r.getChatSession(s)
+	chatSession := r.GetChatSession(s)
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}
@@ -96,7 +96,7 @@ func (r *ParamRunner) Execute(s *andflow.Session, param *andflow.ActionParam, st
 
 	if is_back {
 		// 返回节点
-		backActions := r.getNextActionsByName(s, action, param_back_links)
+		backActions := r.GetNextActionsByName(s, action, param_back_links)
 		state.NextActionIds = make([]string, 0)
 		for _, act := range backActions {
 			state.NextActionIds = append(state.NextActionIds, act.Id)
@@ -187,7 +187,7 @@ func (r *ParamRunner) Execute(s *andflow.Session, param *andflow.ActionParam, st
 		param_checked := action.GetParam("param_checked_" + action.Id)
 		//如果还没有回答就提示用户确认
 		if param_checked == "" || param_checked == "false" {
-			param_check_ask := r.getActionParam(action, "param_check_ask", s.GetParamMap())
+			param_check_ask := r.GetActionParam(action, "param_check_ask", s.GetParamMap())
 
 			if len(param_check_ask) > 0 {
 
@@ -202,7 +202,7 @@ func (r *ParamRunner) Execute(s *andflow.Session, param *andflow.ActionParam, st
 	}
 
 	// 后续节点
-	nextActions := r.getNextActionsByName(s, action, param_check_links)
+	nextActions := r.GetNextActionsByName(s, action, param_check_links)
 	state.NextActionIds = make([]string, 0)
 	for _, act := range nextActions {
 		state.NextActionIds = append(state.NextActionIds, act.Id)
@@ -261,7 +261,7 @@ func (r *ParamRunner) clearAnswers(s *andflow.Session, action *andflow.ActionMod
 
 // 解析用户提问或者回答内容，答案提取
 func (r *ParamRunner) fillAnswers(s *andflow.Session, action *andflow.ActionModel, params []*ParamItem, param_name string, messageContent string) {
-	chatSession := r.getChatSession(s)
+	chatSession := r.GetChatSession(s)
 	opt := chatSession.Opt
 
 	for _, p := range params {

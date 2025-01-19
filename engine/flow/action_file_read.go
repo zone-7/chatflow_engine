@@ -23,7 +23,7 @@ func (r *File_readRunner) Execute(s *andflow.Session, param *andflow.ActionParam
 
 	action := s.GetFlow().GetAction(param.ActionId)
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}

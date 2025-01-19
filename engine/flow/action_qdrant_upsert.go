@@ -26,7 +26,7 @@ func (r *Qdrant_upsert_Runner) Execute(s *andflow.Session, param *andflow.Action
 
 	action := s.GetFlow().GetAction(param.ActionId)
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 
 	if err != nil {
 		return andflow.RESULT_FAILURE, err

@@ -35,7 +35,7 @@ func (r *BaiduErnieRunner) Execute(s *andflow.Session, param *andflow.ActionPara
 	log.Printf("baidu ernie begin: %v", time.Now())
 	defer log.Printf("baidu ernie end: %v", time.Now())
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}
@@ -85,7 +85,7 @@ func (r *BaiduErnieRunner) Execute(s *andflow.Session, param *andflow.ActionPara
 		return andflow.RESULT_FAILURE, errors.New("参数 secret_key 不能为空")
 	}
 
-	chatSession := r.getChatSession(s)
+	chatSession := r.GetChatSession(s)
 
 	requestContent := ""
 	if content_source == "temp" && len(content_temp) > 0 {

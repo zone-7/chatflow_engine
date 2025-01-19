@@ -24,9 +24,9 @@ func (r *SubflowRunner) Execute(s *andflow.Session, param *andflow.ActionParam, 
 	var err error
 
 	action := s.GetFlow().GetAction(param.ActionId)
-	chatSession := r.getChatSession(s)
+	chatSession := r.GetChatSession(s)
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
@@ -37,7 +37,7 @@ func (r *SubflowRunner) Execute(s *andflow.Session, param *andflow.ActionParam, 
 
 	flow_code := prop["flow_code"]
 	response_params := prop["response_params"]
-	flow_params_json := r.getActionParam(action, "flow_params", nil)
+	flow_params_json := r.GetActionParam(action, "flow_params", nil)
 
 	flow_params := make(map[string]string)
 

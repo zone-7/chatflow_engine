@@ -27,9 +27,9 @@ func (r *Knowledge_search_Runner) Execute(s *andflow.Session, param *andflow.Act
 
 	action := s.GetFlow().GetAction(param.ActionId)
 
-	chatSession := r.getChatSession(s)
+	chatSession := r.GetChatSession(s)
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}
@@ -51,7 +51,7 @@ func (r *Knowledge_search_Runner) Execute(s *andflow.Session, param *andflow.Act
 	if param_source == "temp" && len(param_source_temp) > 0 {
 		requestContent_param = param_source_temp
 	} else {
-		chatSession := r.getChatSession(s)
+		chatSession := r.GetChatSession(s)
 		requestContent_param = chatSession.GetCurrentRequestMessagesContent(1)
 	}
 

@@ -24,12 +24,12 @@ func (r *OllamaEmbeddingRunner) Properties() []andflow.Prop {
 }
 func (r *OllamaEmbeddingRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	action := s.GetFlow().GetAction(param.ActionId)
-	chatSession := r.getChatSession(s)
+	chatSession := r.GetChatSession(s)
 
 	log.Printf("ollama embedding begin: %v", time.Now())
 	defer log.Printf("ollama embedding end: %v", time.Now())
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}

@@ -27,7 +27,7 @@ func (r *Excel_writeRunner) Execute(s *andflow.Session, param *andflow.ActionPar
 
 	action := s.GetFlow().GetAction(param.ActionId)
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}

@@ -24,9 +24,9 @@ func (r *RouteRunner) Execute(s *andflow.Session, param *andflow.ActionParam, st
 	var err error
 
 	action := s.GetFlow().GetAction(param.ActionId)
-	chatSession := r.getChatSession(s)
+	chatSession := r.GetChatSession(s)
 
-	prop, err := r.getActionParams(action, s.GetParamMap())
+	prop, err := r.GetActionParams(action, s.GetParamMap())
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}
@@ -85,9 +85,9 @@ func (r *RouteRunner) Execute(s *andflow.Session, param *andflow.ActionParam, st
 			keyword = requestContent_route
 		}
 
-		routeNextActions := r.getNextActionsByKeyword(s, action, keyword)
+		routeNextActions := r.GetNextActionsByKeyword(s, action, keyword)
 		if routeNextActions == nil || len(routeNextActions) == 0 {
-			routeNextActions = r.getNextActionsByEmptyKeyword(s, action)
+			routeNextActions = r.GetNextActionsByEmptyKeyword(s, action)
 		}
 		//执行路由下的路径
 		if routeNextActions != nil && len(routeNextActions) > 0 {
