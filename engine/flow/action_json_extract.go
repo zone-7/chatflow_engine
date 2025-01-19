@@ -1,6 +1,7 @@
 package flow
 
 import (
+	"encoding/json"
 	"log"
 	"regexp"
 	"time"
@@ -11,7 +12,7 @@ import (
 // 从聊天记录或者当前参数中提取JSON
 
 func init() {
-	andflow.RegistActionRunner("json_extract", &Json_extract_runner{})
+	andflow.RegistActionRunner("json_extract1", &Json_extract_runner{})
 }
 
 type Json_extract_runner struct {
@@ -21,6 +22,24 @@ type Json_extract_runner struct {
 func (r *Json_extract_runner) Properties() []andflow.Prop {
 	return []andflow.Prop{}
 }
+
+func (r *Json_extract_runner) getJson(s string) string {
+	// 匹配可能嵌套的 JSON 对象或数组 (通过贪婪模式匹配)
+	re := regexp.MustCompile(`(?s)\{(?:[^{}]|\{.*\}|$begin:math:display$.*$end:math:display$)*}\s*|$begin:math:display$(?:[^\\[$end:math:display$]|\{.*\}|$begin:math:display$.*$end:math:display$)*]\s*`)
+	matches := re.FindString(s)
+	if matches == "" {
+		return ""
+	}
+
+	var result interface{}
+	// 尝试解析 JSON
+	if err := json.Unmarshal([]byte(matches), &result); err != nil {
+		return ""
+	}
+
+	return matches
+}
+
 func (r *Json_extract_runner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 	action := s.GetFlow().GetAction(param.ActionId)
@@ -37,30 +56,19 @@ func (r *Json_extract_runner) Execute(s *andflow.Session, param *andflow.ActionP
 	content_source := prop["content_source"] //信息来自参数还是输入
 	content_temp := prop["content_temp"]     //信息来自哪个参数
 	param_key := prop["param_key"]
-	// 定义正则表达式匹配 JSON 对象或数组
-	// 匹配以 { 开始并以 } 结束 或 以 [ 开始并以 ] 结束
-	re := regexp.MustCompile(`\{[^{}]*\}|$begin:math:display$[^\\[$end:math:display$]*\]`)
 
 	result := ""
 	if content_source == "temp" && len(content_temp) > 0 {
-
-		matches := re.FindAllString(content_temp, -1)
-		if len(matches) > 0 {
-			result = matches[0]
-		}
-
+		result = r.getJson(content_temp)
 	} else if content_source == "history" {
 
 		messages := chatSession.GetMessages()
 		var i int
 		for i = len(messages) - 1; i >= 0; i-- {
 			text := messages[i].Content
-			// 正则表达式匹配
+			result = r.getJson(text)
 
-			// 提取匹配结果
-			matches := re.FindAllString(text, -1)
-			if len(matches) > 0 {
-				result = matches[0]
+			if len(result) > 0 {
 				break
 			}
 		}
@@ -73,13 +81,9 @@ func (r *Json_extract_runner) Execute(s *andflow.Session, param *andflow.ActionP
 		text := ""
 		for _, msg := range messages {
 			text += msg.Content
-
 		}
 
-		matches := re.FindAllString(text, -1)
-		if len(matches) > 0 {
-			result = matches[0]
-		}
+		result = r.getJson(text)
 
 	}
 
