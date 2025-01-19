@@ -12,7 +12,7 @@ import (
 // 从聊天记录或者当前参数中提取JSON
 
 func init() {
-	andflow.RegistActionRunner("json_extract1", &Json_extract_runner{})
+	andflow.RegistActionRunner("json_extract", &Json_extract_runner{})
 }
 
 type Json_extract_runner struct {
