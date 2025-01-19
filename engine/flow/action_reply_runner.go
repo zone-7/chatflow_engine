@@ -16,6 +16,9 @@ type ReplyRunner struct {
 	BaseRunner
 }
 
+func (r *ReplyRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *ReplyRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 
 	var err error

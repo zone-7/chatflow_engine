@@ -18,6 +18,9 @@ type Es8_vector_search_Runner struct {
 	BaseRunner
 }
 
+func (r *Es8_vector_search_Runner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *Es8_vector_search_Runner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 
 	var err error

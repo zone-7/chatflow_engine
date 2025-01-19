@@ -39,6 +39,9 @@ type ParamRunner struct {
 	BaseRunner
 }
 
+func (r *ParamRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *ParamRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 	action := s.GetFlow().GetAction(param.ActionId)
@@ -76,9 +79,7 @@ func (r *ParamRunner) Execute(s *andflow.Session, param *andflow.ActionParam, st
 	// 获取消息
 	requestContent_param := ""
 	if param_source == "temp" && len(param_source_temp) > 0 {
-
 		requestContent_param = param_source_temp
-
 	} else {
 		requestContent_param = chatSession.GetCurrentRequestMessagesContent(1)
 	}
@@ -94,7 +95,6 @@ func (r *ParamRunner) Execute(s *andflow.Session, param *andflow.ActionParam, st
 	}
 
 	if is_back {
-
 		// 返回节点
 		backActions := r.getNextActionsByName(s, action, param_back_links)
 		state.NextActionIds = make([]string, 0)

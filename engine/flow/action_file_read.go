@@ -15,6 +15,9 @@ type File_readRunner struct {
 	BaseRunner
 }
 
+func (r *File_readRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *File_readRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 

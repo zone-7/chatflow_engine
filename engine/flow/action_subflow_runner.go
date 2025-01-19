@@ -17,6 +17,9 @@ type SubflowRunner struct {
 	BaseRunner
 }
 
+func (r *SubflowRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *SubflowRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 

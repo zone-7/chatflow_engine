@@ -18,6 +18,9 @@ type File_writeRunner struct {
 	BaseRunner
 }
 
+func (r *File_writeRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *File_writeRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 

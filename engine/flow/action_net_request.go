@@ -20,6 +20,9 @@ type Net_requestRunner struct {
 	BaseRunner
 }
 
+func (r *Net_requestRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *Net_requestRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 
 	var err error

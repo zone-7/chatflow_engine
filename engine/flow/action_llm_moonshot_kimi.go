@@ -25,6 +25,9 @@ type MoonshotKimiRunner struct {
 	BaseRunner
 }
 
+func (r *MoonshotKimiRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *MoonshotKimiRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	action := s.GetFlow().GetAction(param.ActionId)
 	chatSession := r.getChatSession(s)

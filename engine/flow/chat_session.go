@@ -23,6 +23,7 @@ var Sessions = make(map[string]*ChatSession)
 
 func init() {
 	go monitSession()
+
 }
 
 type ChatSession struct {

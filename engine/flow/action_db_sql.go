@@ -15,6 +15,9 @@ type Db_sql_Runner struct {
 	BaseRunner
 }
 
+func (r *Db_sql_Runner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *Db_sql_Runner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 

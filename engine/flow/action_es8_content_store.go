@@ -18,6 +18,9 @@ type Es8_content_store_Runner struct {
 	BaseRunner
 }
 
+func (r *Es8_content_store_Runner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *Es8_content_store_Runner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 
 	var err error

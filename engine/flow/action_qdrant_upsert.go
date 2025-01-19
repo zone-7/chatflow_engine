@@ -17,6 +17,9 @@ type Qdrant_upsert_Runner struct {
 	BaseRunner
 }
 
+func (r *Qdrant_upsert_Runner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *Qdrant_upsert_Runner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 
 	var err error

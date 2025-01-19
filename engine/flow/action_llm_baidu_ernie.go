@@ -26,6 +26,9 @@ type BaiduErnieRunner struct {
 	BaseRunner
 }
 
+func (r *BaiduErnieRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *BaiduErnieRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	action := s.GetFlow().GetAction(param.ActionId)
 

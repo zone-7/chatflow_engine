@@ -20,6 +20,9 @@ type CmdRunner struct {
 	BaseRunner
 }
 
+func (r *CmdRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *CmdRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 
 	var err error
@@ -30,6 +33,7 @@ func (r *CmdRunner) Execute(s *andflow.Session, param *andflow.ActionParam, stat
 	actionId := param.ActionId
 
 	prop, err := r.getActionParams(action, s.GetParamMap())
+
 	if err != nil {
 		return andflow.RESULT_FAILURE, err
 	}

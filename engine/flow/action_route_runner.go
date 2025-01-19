@@ -17,6 +17,9 @@ type RouteRunner struct {
 	BaseRunner
 }
 
+func (r *RouteRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *RouteRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 	var err error
 

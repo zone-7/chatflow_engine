@@ -17,6 +17,9 @@ type Excel_writeRunner struct {
 	BaseRunner
 }
 
+func (r *Excel_writeRunner) Properties() []andflow.Prop {
+	return []andflow.Prop{}
+}
 func (r *Excel_writeRunner) Execute(s *andflow.Session, param *andflow.ActionParam, state *andflow.ActionStateModel) (andflow.Result, error) {
 
 	var err error

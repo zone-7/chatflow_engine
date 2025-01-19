@@ -38,7 +38,7 @@ require (
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
-	github.com/zone-7/andflow_go v0.0.0-20250116024830-a3d1bc774d7e // indirect
+	github.com/zone-7/andflow_go v0.0.0-20250119025657-6b4e60e3eb15 // indirect
 	go.opentelemetry.io/otel v1.28.0 // indirect
 	go.opentelemetry.io/otel/metric v1.28.0 // indirect
 	go.opentelemetry.io/otel/trace v1.28.0 // indirect
