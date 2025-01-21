@@ -3,7 +3,6 @@ package utils
 import (
 	"encoding/json"
 	"os"
-	"sort"
 	"strings"
 
 	"baliance.com/gooxml/document"
@@ -22,7 +21,6 @@ func ReadPdf(filepath string) (string, error) {
 	}
 
 	text_pages := make([]string, 0)
-	text_rows := make([]string, 0)
 	totalPage := r.NumPage()
 	for pageIndex := 1; pageIndex <= totalPage; pageIndex++ {
 
@@ -31,23 +29,9 @@ func ReadPdf(filepath string) (string, error) {
 			continue
 		}
 
-		rows, err := p.GetTextByRow()
+		page_txt, err := p.GetPlainText(nil)
 		if err != nil {
 			continue
-		}
-		sort.Slice(rows, func(i, j int) bool {
-			return rows[i].Position < rows[j].Position
-
-		})
-		page_txt := ""
-		for _, row := range rows {
-
-			row_txt := ""
-			for _, word := range row.Content {
-				row_txt += word.S
-			}
-			text_rows = append(text_rows, row_txt)
-			page_txt += row_txt + "\n"
 		}
 
 		text_pages = append(text_pages, page_txt)
