@@ -2,9 +2,9 @@ package flow
 
 import (
 	"errors"
-	"os"
 
 	"github.com/zone-7/andflow_go/andflow"
+	"github.com/zone-7/chatflow_engine/engine/utils"
 )
 
 func init() {
@@ -46,7 +46,8 @@ func (r *File_readRunner) Execute(s *andflow.Session, param *andflow.ActionParam
 		param_key = action.Id
 	}
 
-	data, err := os.ReadFile(filepath)
+	data, err := utils.ReadFile(filepath)
+
 	if err != nil {
 		s.AddLog_action_error(action.Name, action.Title, "读取文件失败"+err.Error())
 
